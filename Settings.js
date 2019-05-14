@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, Picker } from "react-native";
+import { Context } from "./App";
 
 export class Settings extends React.Component {
   static navigationOptions = {
@@ -17,48 +18,63 @@ export class Settings extends React.Component {
       >
         <View>
           <Text>I speak</Text>
-          <Picker
-            selectedValue="en"
-            style={{
-              height: 50,
-              width: 150,
-              borderWidth: 5,
-              borderColor: "black"
-            }}
-          >
-            <Picker.Item label="Portuguese" value="pt" />
-            <Picker.Item label="English" value="en" />
-          </Picker>
+          <Context.Consumer>
+            {context => (
+              <Picker
+                selectedValue={context.nativeLanguage}
+                style={{
+                  height: 50,
+                  width: 150,
+                  borderWidth: 5,
+                  borderColor: "black"
+                }}
+                onValueChange={value => context.setNativeLanguage(value)}
+              >
+                <Picker.Item label="Portuguese" value="pt" />
+                <Picker.Item label="English" value="en" />
+              </Picker>
+            )}
+          </Context.Consumer>
         </View>
         <View>
           <Text>I want to learn</Text>
-          <Picker
-            selectedValue="pt"
-            style={{
-              height: 50,
-              width: 150,
-              borderWidth: 5,
-              borderColor: "black"
-            }}
-          >
-            <Picker.Item label="Portuguese" value="pt" />
-            <Picker.Item label="English" value="en" />
-          </Picker>
+          <Context.Consumer>
+            {context => (
+              <Picker
+                selectedValue={context.targetLanguage}
+                style={{
+                  height: 50,
+                  width: 150,
+                  borderWidth: 5,
+                  borderColor: "black"
+                }}
+                onValueChange={value => context.setTargetLanguage(value)}
+              >
+                <Picker.Item label="Portuguese" value="pt" />
+                <Picker.Item label="English" value="en" />
+              </Picker>
+            )}
+          </Context.Consumer>
         </View>
         <View>
           <Text>I want to learn about</Text>
-          <Picker
-            selectedValue="things"
-            style={{
-              height: 50,
-              width: 150,
-              borderWidth: 5,
-              borderColor: "black"
-            }}
-          >
-            <Picker.Item label="Things" value="things" />
-            <Picker.Item label="Animals" value="animals" />
-          </Picker>
+          <Context.Consumer>
+            {context => (
+              <Picker
+                selectedValue={context.learningSubject}
+                style={{
+                  height: 50,
+                  width: 150,
+                  borderWidth: 5,
+                  borderColor: "black"
+                }}
+                onValueChange={value => context.setLearningSubject(value)}
+              >
+                <Picker.Item label="Things" value="things" />
+                <Picker.Item label="Animals" value="animals" />
+              </Picker>
+            )}
+          </Context.Consumer>
         </View>
       </View>
     );
