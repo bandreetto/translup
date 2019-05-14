@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, TouchableOpacity, Image, Text } from "react-native";
 import { Camera, Permissions } from "expo";
+import { Context } from "./App";
 
 export class Home extends React.Component {
   static navigationOptions = {
@@ -8,7 +9,17 @@ export class Home extends React.Component {
   };
 
   state = {
-    cameraPermissionGranted: false
+    cameraPermissionGranted: false,
+    matchOptions: {
+      things: {
+        pt: "Cadeira",
+        en: "Chair"
+      },
+      animals: {
+        pt: "Gato",
+        en: "Cat"
+      }
+    }
   };
 
   async componentDidMount() {
@@ -53,7 +64,13 @@ export class Home extends React.Component {
                     width: 50
                   }}
                 >
-                  Cadeira
+                  <Context.Consumer>
+                    {context =>
+                      this.state.matchOptions[context.learningSubject][
+                        context.targetLanguage
+                      ]
+                    }
+                  </Context.Consumer>
                 </Text>
                 <View
                   style={{
