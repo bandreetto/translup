@@ -3,6 +3,10 @@ import { View, TouchableOpacity, Image, Text } from "react-native";
 import { Camera, Permissions } from "expo";
 
 export class Home extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
   state = {
     cameraPermissionGranted: false
   };
@@ -31,12 +35,7 @@ export class Home extends React.Component {
                   marginLeft: 5
                 }}
                 onPress={() => {
-                  this.setState({
-                    type:
-                      this.state.type === Camera.Constants.Type.back
-                        ? Camera.Constants.Type.front
-                        : Camera.Constants.Type.back
-                  });
+                  this.props.navigation.navigate("Settings");
                 }}
               >
                 <Image source={require("./assets/gear.png")} />
